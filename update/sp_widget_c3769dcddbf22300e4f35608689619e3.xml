@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope) {
+	var c = this;
+	
+	c.addItem = function() {
+		c.server.update().then(function(response) {
+			c.data = {};
+		});
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>add_to_do</id>
+        <internal>false</internal>
+        <link/>
+        <name>Add To Do</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	if (!input)
+		return;
+	
+	var gr = new GlideRecord('x_11264_to_do_to_do');
+	gr.initialize();
+	gr.setValue('title', input.title);
+	gr.setValue('short_description', input.short_description);
+	gr.insert();
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-01-02 20:20:35</sys_created_on>
+        <sys_id>c3769dcddbf22300e4f35608689619e3</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Add To Do</sys_name>
+        <sys_package display_value="To Do" source="x_11264_to_do">2263590ddbf22300e4f3560868961956</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="To Do">2263590ddbf22300e4f3560868961956</sys_scope>
+        <sys_update_name>sp_widget_c3769dcddbf22300e4f35608689619e3</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-01-02 20:25:06</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-default">
+  <div class="panel-heading">
+    Add To Do
+  </div>
+  <div class="panel-body">
+    <div class="form-group">
+      <label>Title</label>
+      <input class="form-control" ng-model="c.data.title"/>
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <input class="form-control" ng-model="c.data.short_description"/>
+    </div>
+    <div class="form-group">
+      <input class="btn btn-primary btn-block" ng-click="c.addItem()" type="submit" />
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>
