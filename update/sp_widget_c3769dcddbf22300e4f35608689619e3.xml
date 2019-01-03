@@ -8,7 +8,14 @@
 		c.server.update().then(function(response) {
 			c.data = {};
 		});
-	}
+	};
+	
+	c.submitOnEnter = function($event) {
+		var keyCode = $event.which || $event.keyCode;
+		if (keyCode === 13) {
+			c.addItem();
+		}
+	};
 }]]></client_script>
         <controller_as>c</controller_as>
         <css/>
@@ -40,14 +47,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-01-02 20:20:35</sys_created_on>
         <sys_id>c3769dcddbf22300e4f35608689619e3</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_name>Add To Do</sys_name>
         <sys_package display_value="To Do" source="x_11264_to_do">2263590ddbf22300e4f3560868961956</sys_package>
         <sys_policy/>
         <sys_scope display_value="To Do">2263590ddbf22300e4f3560868961956</sys_scope>
         <sys_update_name>sp_widget_c3769dcddbf22300e4f35608689619e3</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-01-02 20:25:06</sys_updated_on>
+        <sys_updated_on>2019-01-03 13:31:57</sys_updated_on>
         <template><![CDATA[<div class="panel panel-default">
   <div class="panel-heading">
     Add To Do
@@ -55,11 +62,11 @@
   <div class="panel-body">
     <div class="form-group">
       <label>Title</label>
-      <input class="form-control" ng-model="c.data.title"/>
+      <input class="form-control" ng-model="c.data.title" ng-keypress="c.submitOnEnter($event)" />
     </div>
     <div class="form-group">
       <label>Description</label>
-      <input class="form-control" ng-model="c.data.short_description"/>
+      <input class="form-control" ng-model="c.data.short_description" ng-keypress="c.submitOnEnter($event)" />
     </div>
     <div class="form-group">
       <input class="btn btn-primary btn-block" ng-click="c.addItem()" type="submit" />
