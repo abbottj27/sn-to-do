@@ -36,6 +36,20 @@
 		return allComplete;
 	};
 	
+  c.dragControlListeners = {
+		disabled: false,
+		// Upon the event's stop, start the re-order on the server
+		stop: function(event, ui) {
+			for (var i = 0; i < c.data.to_dos.length; i++) {
+				c.server.get({
+					method: 'updateOrder',
+					sys_id: c.data.to_dos[i].sys_id,
+					order: i
+				});
+			}
+		}
+	};
+	
 	spUtil.recordWatch($scope, 'x_11264_to_do_to_do', '', function(name,data) {
 		spUtil.update($scope);
 	});
@@ -47,6 +61,20 @@
 
 .icon-saver {
   min-height: 40px;
+}
+
+.grabbable {
+  cursor: move; /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+ /* Apply a "closed-hand" cursor during drag operation. */
+.grabbable:active { 
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
 }</css>
         <data_table>sp_instance</data_table>
         <demo_data/>
@@ -72,6 +100,11 @@
 			toDo.update();
 		}
 		
+		if (input.method === 'updateOrder') {
+			toDo.setValue('order', input.order);
+			toDo.update();
+		}
+		
 		if (input.method === 'deleteToDo') {
 			toDo.deleteRecord();
 		}
@@ -81,6 +114,7 @@
 	
 	var gr = new GlideRecord('x_11264_to_do_to_do');
 	gr.addQuery('owner', gs.getUserID());
+	gr.orderBy('order');
 	gr.query();
 	while (gr.next()) {
 		var to_do = {};
@@ -88,6 +122,7 @@
 		to_do.short_description = (gr.getDisplayValue('short_description') != 'undefined') ? gr.getDisplayValue('short_description') : '';
 		to_do.complete = (gr.getDisplayValue('complete') === 'true');
 		to_do.sys_id = gr.getUniqueValue();
+		to_do.order = parseInt(gr.getValue('order'));
 		data.to_dos.push(to_do);
 	}
 
@@ -97,20 +132,20 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-01-02 20:17:19</sys_created_on>
         <sys_id>0bb5d1cddbf22300e4f3560868961970</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>53</sys_mod_count>
         <sys_name>To Do List</sys_name>
         <sys_package display_value="To Do" source="x_11264_to_do">2263590ddbf22300e4f3560868961956</sys_package>
         <sys_policy/>
         <sys_scope display_value="To Do">2263590ddbf22300e4f3560868961956</sys_scope>
         <sys_update_name>sp_widget_0bb5d1cddbf22300e4f3560868961970</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-01-02 20:25:20</sys_updated_on>
+        <sys_updated_on>2019-01-03 19:05:06</sys_updated_on>
         <template><![CDATA[<div class="panel panel-default">
   <div class="panel-heading">
     To Do List
   </div>
-  <div class="list-group">
-    <a class="list-group-item" ng-repeat="to_do in c.data.to_dos | orderBy:'complete'" ng-if="(!c.showCompleted && !to_do.complete) || c.showCompleted">
+  <div class="list-group" ui-sortable="c.dragControlListeners" is-disabled="false" ng-model="c.data.to_dos">
+    <a class="list-group-item grabbable" ng-repeat="to_do in c.data.to_dos" ui-sortable-item ui-sortable-handle ng-show="(!c.showCompleted && !to_do.complete) || c.showCompleted">
     	<input class="pull-left pointer" type="checkbox" ng-model="to_do.complete" ng-change="c.completeToDo(to_do)"/>
       <div class="m-l-lg icon-saver" ng-class="{'text-muted': to_do.complete == true}">
         <b ng-class="{'text-muted': to_do.complete == true, 'text-primary': to_do.complete == false}">{{to_do.title}}</b><br/>

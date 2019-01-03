@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_11264_to_do.ToDoUtil</api_name>
+        <client_callable>false</client_callable>
+        <description>Utility functions for the To Do application</description>
+        <name>ToDoUtil</name>
+        <script><![CDATA[var ToDoUtil = Class.create();
+ToDoUtil.prototype = {
+	initialize: function() {
+	},
+	
+	/***********************************************************
+ 	* Returns the next number up based on the user's existing
+ 	* To Do items. Returns 0 if the user does not have any.
+ 	***********************************************************/
+	getNextOrder: function() {
+		var gr = new GlideRecord('x_11264_to_do_to_do');
+		gr.addQuery('owner', gs.getUserID());
+		gr.orderByDesc('order');
+		gr.query();
+		return (gr.next()) ? parseInt(gr.getValue('order')) + 1 : 0;
+	},
+	
+	type: 'ToDoUtil'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-01-03 14:11:46</sys_created_on>
+        <sys_id>775b49dddb322300e4f35608689619c4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>ToDoUtil</sys_name>
+        <sys_package display_value="To Do" source="x_11264_to_do">2263590ddbf22300e4f3560868961956</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="To Do">2263590ddbf22300e4f3560868961956</sys_scope>
+        <sys_update_name>sys_script_include_775b49dddb322300e4f35608689619c4</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-01-03 14:11:46</sys_updated_on>
+    </sys_script_include>
+</record_update>

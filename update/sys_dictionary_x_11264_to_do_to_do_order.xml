@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update>
-    <sys_dictionary action="INSERT_OR_UPDATE" element="complete" table="x_11264_to_do_to_do">
+    <sys_dictionary action="INSERT_OR_UPDATE" element="order" table="x_11264_to_do_to_do">
         <active>true</active>
         <array>false</array>
         <array_denormalized>false</array_denormalized>
         <attributes/>
         <audit>false</audit>
         <calculation><![CDATA[(function calculatedFieldValue(current) {
-
-	// Add your code here
-	return '';  // return the calculated value
-
+	
 })(current);]]></calculation>
         <choice/>
         <choice_field/>
         <choice_table/>
-        <column_label>Complete</column_label>
+        <column_label>Order</column_label>
         <comments/>
         <create_roles/>
         <default_value/>
@@ -27,18 +24,18 @@
         <dynamic_creation_script/>
         <dynamic_default_value/>
         <dynamic_ref_qual/>
-        <element>complete</element>
+        <element>order</element>
         <element_reference>false</element_reference>
         <foreign_database/>
         <function_definition/>
         <function_field>false</function_field>
-        <internal_type display_value="">boolean</internal_type>
+        <internal_type display_value="Integer">integer</internal_type>
         <mandatory>false</mandatory>
         <max_length>40</max_length>
         <name>x_11264_to_do_to_do</name>
         <next_element/>
         <primary>false</primary>
-        <read_only>false</read_only>
+        <read_only>true</read_only>
         <read_roles/>
         <reference/>
         <reference_cascade_rule/>
@@ -52,16 +49,16 @@
         <staged>false</staged>
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2019-01-02 20:12:52</sys_created_on>
-        <sys_id>b7438dd5db322300e4f3560868961978</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_name>Complete</sys_name>
+        <sys_created_on>2019-01-03 14:02:48</sys_created_on>
+        <sys_id>de49019ddb322300e4f3560868961991</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Order</sys_name>
         <sys_package display_value="To Do" source="x_11264_to_do">2263590ddbf22300e4f3560868961956</sys_package>
         <sys_policy/>
         <sys_scope display_value="To Do">2263590ddbf22300e4f3560868961956</sys_scope>
-        <sys_update_name>sys_dictionary_x_11264_to_do_to_do_complete</sys_update_name>
-        <sys_updated_by>system</sys_updated_by>
-        <sys_updated_on>2019-01-03 13:35:19</sys_updated_on>
+        <sys_update_name>sys_dictionary_x_11264_to_do_to_do_order</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-01-03 14:10:20</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
